@@ -80,6 +80,3 @@ async def delete_unconverted_message(original_message, converted_message):
 
 def run_bot():
     bot.run(TOKEN)
-
-if __name__ == '__main__':
-    threading.Thread(target=run_bot).start()
