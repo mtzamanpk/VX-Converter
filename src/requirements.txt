@@ -1,1 +1,3 @@
-
+pip install re
+pip install os 
+pip install discord
