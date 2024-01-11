@@ -8,8 +8,7 @@ from keep_alive import keep_alive
 
 keep_alive()
 
-bot = BOT(TOKEN = os.environ.get('DISCORD_TOKEN'))
-dp = Dispatcher(bot)
+TOKEN = os.environ.get('DISCORD_TOKEN')
 BOT_PREFIX = '!'
 
 intents = discord.Intents.default()
