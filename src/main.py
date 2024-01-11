@@ -79,6 +79,6 @@ async def delete_unconverted_message(original_message, converted_message):
         print(f'An error occurred while deleting a message: {e}')
 
 def run_bot():
-    bot.run(TOKEN)
+    bot.run('DISCORD_TOKEN')
 if __name__ == '__main__':
     threading.Thread(target=run_bot).start()
