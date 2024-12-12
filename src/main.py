@@ -5,10 +5,9 @@ from discord.ext import commands
 from flask import Flask
 import threading
 from keep_alive import keep_alive
-
 keep_alive()
 
-TOKEN = os.environ.get('DISCORD_TOKEN')
+TOKEN = os.getenv('DISCORD_TOKEN')
 BOT_PREFIX = '!'
 
 intents = discord.Intents.default()
@@ -56,11 +55,6 @@ def convert_links(content):
     x_replacement = r'https://fixupx.com/'
     content = re.sub(x_pattern, x_replacement, content)
 
-    # Convert Twitter links
-    twitter_pattern = r'https://twitter.com/'
-    twitter_replacement = r'https://vxtwitter.com/'
-    content = re.sub(twitter_pattern, twitter_replacement, content)
-
     return content
 
 async def delete_unconverted_message(original_message, converted_message):
@@ -78,5 +72,18 @@ async def delete_unconverted_message(original_message, converted_message):
     except discord.HTTPException as e:
         print(f'An error occurred while deleting a message: {e}')
 
-def run_bot():
+def keep_alive():
+    app = Flask(__name__)
+
+    @app.route('/')
+    def home():
+        return "Bot is running!"
+
+    def run():
+        app.run(host='0.0.0.0', port=8080)
+
+    threading.Thread(target=run).start()
+
+if __name__ == '__main__':
+    keep_alive()
     bot.run(TOKEN)
